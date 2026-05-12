@@ -1,4 +1,5 @@
-import { writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
+import { dirname } from "node:path";
 import { ConsolidatedReport } from "../types.js";
 
 function escapeHtml(value: string): string {
@@ -10,7 +11,7 @@ function escapeHtml(value: string): string {
     .replaceAll("'", "&#39;");
 }
 
-export async function writeHtmlReport(report: ConsolidatedReport, outputPath = "report.html"): Promise<void> {
+export async function writeHtmlReport(report: ConsolidatedReport, outputPath = "reports/report.html"): Promise<void> {
   const findingsHtml = report.findings
     .map(
       (finding) => `
@@ -54,6 +55,7 @@ export async function writeHtmlReport(report: ConsolidatedReport, outputPath = "
   </ul>
 </body>
 </html>`;
-
+ 
+  await mkdir(dirname(outputPath), { recursive: true });
   await writeFile(outputPath, html, "utf-8");
 }

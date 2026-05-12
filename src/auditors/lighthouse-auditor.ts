@@ -40,7 +40,7 @@ export async function runLighthouseAudit(url: string): Promise<LighthouseAuditRe
         description: details,
         impact: audit.score !== null && audit.score < 0.5 ? "serious" : "moderate",
         severity: normalizeSeverity(audit.score !== null && audit.score < 0.5 ? "serious" : "moderate"),
-        recommendation: recommendationFromContext(title, description),
+        recommendation: recommendationFromContext(audit.title, audit.description),
         emagCriteria: mapToEmagCriteria(`${title} ${description}`)
       };
     });

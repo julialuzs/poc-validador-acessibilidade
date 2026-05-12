@@ -32,12 +32,13 @@ export async function runW3CAudit(url: string): Promise<W3CAuditResult> {
     const messages = data.messages ?? [];
     const findings: Finding[] = messages.map((msg, index) => {
       const messageType = msg.type === "error" ? "serious" : "minor";
-      const context = translateToPortuguese(`${msg.message} ${msg.extract ?? ""}`.trim());
+      const context = `${msg.message} ${msg.extract ?? ""}`.trim();
+      const contextTraduzido = translateToPortuguese(context);
       return {
         id: `w3c:${index + 1}`,
         source: "w3c",
         title: msg.type === "error" ? "Erro de validação estrutural" : "Aviso estrutural",
-        description: context.trim(),
+        description: contextTraduzido.trim(),
         impact: messageType,
         severity: normalizeSeverity(messageType),
         recommendation: recommendationFromContext(context, context),

@@ -11,8 +11,8 @@ function parseArgs() {
   const args = process.argv.slice(2);
   const url = args[0];
   const noW3c = args.includes("--no-w3c");
-  const jsonOutput = getArgValue(args, "--json") ?? "report.json";
-  const htmlOutput = getArgValue(args, "--html") ?? "report.html";
+  const jsonOutput = getArgValue(args, "--json") ?? "reports/report.json";
+  const htmlOutput = getArgValue(args, "--html") ?? "reports/report.html";
 
   return { url, noW3c, jsonOutput, htmlOutput };
 }
@@ -37,7 +37,7 @@ function assertValidUrl(url: string): void {
 async function main() {
   const { url, noW3c, jsonOutput, htmlOutput } = parseArgs();
   if (!url) {
-    console.error("Uso: npm run audit -- <url> [--no-w3c] [--json caminho.json] [--html caminho.html]");
+    console.error("Uso: npm run audit -- <url> [--no-w3c] [--json reports/caminho.json] [--html reports/caminho.html]");
     process.exit(1);
   }
 

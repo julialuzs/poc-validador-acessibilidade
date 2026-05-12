@@ -26,7 +26,7 @@ export async function runAxeAudit(url: string): Promise<AxeAuditResult> {
         description,
         impact: violation.impact ?? "unknown",
         severity: normalizeSeverity(violation.impact ?? undefined),
-        recommendation: recommendationFromContext(translatedTitle, translatedDescription),
+        recommendation: recommendationFromContext(violation.help, violation.description),
         emagCriteria: mapToEmagCriteria(`${translatedTitle} ${translatedDescription}`),
         wcagRefs: violation.tags.filter((tag: string) => tag.startsWith("wcag")),
         elementCount: violation.nodes.length
