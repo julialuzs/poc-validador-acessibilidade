@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+  </head>
+  <body>
+    <main>
+      <h1>Login</h1>
+      <form id="login-form" action="#" method="post">
+        <label for="email">E-mail</label>
+        <input id="email" name="email" type="email" autocomplete="username" />
+        <label for="password">Senha</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" />
+        <button type="submit">Entrar</button>
+      </form>
+    </main>
+    <script>
+      document.getElementById("login-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        document.cookie = "session=ok; path=/; max-age=3600";
+        location.href = "/dashboard";
+      });
+    </script>
+  </body>
+</html>

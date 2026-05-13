@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "audit": "tsx src/index.ts",
+    "audit:ci": "tsx src/index.ts --config audit.config.ci.json --out reports/consolidated-report.json",
     "build": "tsc -p tsconfig.json",
+    "start:fixture": "node fixtures/ci-server.mjs",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [],

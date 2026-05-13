@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <main>
+      <h1>Dashboard</h1>
+      <p>Area autenticada (exemplo).</p>
+      <a href="/perfil">Perfil</a>
+    </main>
+    <script>
+      if (!document.cookie.includes("session=ok")) {
+        location.replace("/login");
+      }
+    </script>
+  </body>
+</html>

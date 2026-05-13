@@ -1,4 +1,4 @@
-import { mapToEmagCriteria } from "../config/emag-mapping.js";
+import { mapToEmagCriteria } from "../emag-mapper.js";
 import { normalizeSeverity, recommendationFromContext } from "../config/enrichment.js";
 import { translateToPortuguese } from "../config/translator.js";
 import { Finding, W3CAuditResult } from "../types.js";
@@ -41,8 +41,8 @@ export async function runW3CAudit(url: string): Promise<W3CAuditResult> {
         description: contextTraduzido.trim(),
         impact: messageType,
         severity: normalizeSeverity(messageType),
-        recommendation: recommendationFromContext(context, context),
-        emagCriteria: mapToEmagCriteria(context)
+        recommendation: recommendationFromContext(contextTraduzido, contextTraduzido),
+        emagCriteria: mapToEmagCriteria(contextTraduzido)
       };
     });
 

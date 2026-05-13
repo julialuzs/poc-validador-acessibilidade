@@ -1,0 +1,46 @@
+name: Auditoria de acessibilidade
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Playwright (Chromium)
+        run: npx playwright install chromium --with-deps
+
+      - name: Build TypeScript
+        run: npm run build
+
+      - name: Iniciar aplicacao de exemplo
+        run: node fixtures/ci-server.mjs &
+
+      - name: Aguardar servidor local
+        run: sleep 3
+
+      - name: Executar auditoria (Lighthouse + axe + fluxos)
+        run: npm run audit -- --config audit.config.ci.json --out reports/consolidated-report.json
+
+      - name: Upload relatorios
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorios-acessibilidade
+          path: reports/
