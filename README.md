@@ -47,7 +47,7 @@ Opcoes:
 Exemplo completo:
 
 ```bash
-npm run audit -- https://www.gov.br --json ./report-gov.json --html ./report-gov.html
+npm run audit -- https://www.gov.br --json ./reports/report-gov.json --html ./reports/report-gov.html
 ```
 
 ## Estrutura

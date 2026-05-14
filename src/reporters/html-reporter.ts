@@ -1,6 +1,6 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
-import { ConsolidatedReport } from "../types.js";
+import { ConsolidatedReport, Finding } from "../types.js";
 
 function escapeHtml(value: string): string {
   return value
@@ -11,16 +11,33 @@ function escapeHtml(value: string): string {
     .replaceAll("'", "&#39;");
 }
 
+function sortFindings(a: Finding, b: Finding): number {
+    const severityOrder = {
+        critical: 1,
+        serious: 2,
+        moderate: 3,
+        minor: 4,
+        info: 5
+    };
+  return severityOrder[a.severity] > severityOrder[b.severity] ? 1 : -1;
+}
+
 export async function writeHtmlReport(report: ConsolidatedReport, outputPath = "reports/report.html"): Promise<void> {
   const findingsHtml = report.findings
+    .filter((finding) => finding.source !== "lighthouse")
+    .sort(sortFindings)
     .map(
       (finding) => `
       <li>
         <strong>[${escapeHtml(finding.source)}] ${escapeHtml(finding.title)}</strong>
         <div>Severidade: ${escapeHtml(finding.severity)}</div>
-        <div>Descricao: ${escapeHtml(finding.description)}</div>
-        <div>Recomendacao: ${escapeHtml(finding.recommendation)}</div>
+        <div>Descrição: ${escapeHtml(finding.description)}</div>
+        <div>Recomendação: ${escapeHtml(finding.recommendation)}</div>
         <div>eMAG: ${escapeHtml(finding.emagCriteria.join(", "))}</div>
+        ${finding.helpUrl ? `<div>Help URL: ${escapeHtml(finding.helpUrl)}</div>` : ""}
+        ${finding.wcagRefs ? `<div>WCAG: ${escapeHtml(finding.wcagRefs.join(", "))}</div>` : ""} 
+        ${finding.htmlElement ? `<div>HTML Element: ${escapeHtml(finding.htmlElement)}</div>` : ""} 
+        ${finding.elementCount ? `<div>Element Count: ${escapeHtml(finding.elementCount!.toString())}</div>` : ""}
       </li>`
     )
     .join("\n");

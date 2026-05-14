@@ -9,7 +9,9 @@ export interface Finding {
   severity: Severity;
   recommendation: string;
   emagCriteria: string[];
+  helpUrl?: string;
   wcagRefs?: string[];
+  htmlElement?: string;
   elementCount?: number;
 }
 

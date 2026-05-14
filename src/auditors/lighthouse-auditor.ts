@@ -4,6 +4,7 @@ import type * as LH from "lighthouse/types/lh.js";
 import { mapToEmagCriteria } from "../emag-mapper.js";
 import { normalizeSeverity, recommendationFromContext } from "../config/enrichment.js";
 import { translateToPortuguese } from "../config/translator.js";
+import { writeRawApiReport } from "../helpers/raw-report-writer.js";
 import { Finding, LighthouseAuditResult } from "../types.js";
 
 function mapLhrToResult(url: string, lhr: LH.Result | undefined): LighthouseAuditResult {
@@ -58,6 +59,7 @@ export async function runLighthouseAudit(url: string): Promise<LighthouseAuditRe
       onlyCategories: ["accessibility"]
     });
 
+    await writeRawApiReport("lighthouse", url, runnerResult?.lhr ?? null);
     return mapLhrToResult(url, runnerResult?.lhr);
   } finally {
     await chrome.kill();
@@ -73,5 +75,6 @@ export async function runLighthouseOnDebugPort(url: string, debugPort: number): 
     onlyCategories: ["accessibility"]
   });
 
+  await writeRawApiReport("lighthouse", url, runnerResult?.lhr ?? null);
   return mapLhrToResult(url, runnerResult?.lhr);
 }

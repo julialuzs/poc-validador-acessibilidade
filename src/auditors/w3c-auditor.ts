@@ -1,3 +1,4 @@
+import { writeRawApiReport } from "../helpers/raw-report-writer.js";
 import { mapToEmagCriteria } from "../emag-mapper.js";
 import { normalizeSeverity, recommendationFromContext } from "../config/enrichment.js";
 import { translateToPortuguese } from "../config/translator.js";
@@ -25,10 +26,17 @@ export async function runW3CAudit(url: string): Promise<W3CAuditResult> {
     });
 
     if (!response.ok) {
+      await writeRawApiReport("w3c", url, {
+        ok: false,
+        status: response.status,
+        statusText: response.statusText,
+        endpoint
+      });
       return unavailableResult(url);
     }
 
     const data = (await response.json()) as W3CResponse;
+    await writeRawApiReport("w3c", url, data);
     const messages = data.messages ?? [];
     const findings: Finding[] = messages.map((msg, index) => {
       const messageType = msg.type === "error" ? "serious" : "minor";
@@ -59,7 +67,12 @@ export async function runW3CAudit(url: string): Promise<W3CAuditResult> {
         warnings
       }
     };
-  } catch {
+  } catch (err: unknown) {
+    await writeRawApiReport("w3c", url, {
+      ok: false,
+      error: err instanceof Error ? err.message : String(err),
+      endpoint
+    }).catch(() => undefined);
     return unavailableResult(url);
   }
 }

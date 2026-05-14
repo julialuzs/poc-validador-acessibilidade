@@ -5,6 +5,7 @@ import type { Result } from "axe-core";
 import { mapToEmagCriteria } from "../emag-mapper.js";
 import { normalizeSeverity, recommendationFromContext } from "../config/enrichment.js";
 import { translateToPortuguese } from "../config/translator.js";
+import { writeRawApiReport } from "../helpers/raw-report-writer.js";
 import { AxeAuditResult, Finding } from "../types.js";
 
 function mapViolationsToFindings(violations: Result[]): Finding[] {
@@ -22,6 +23,8 @@ function mapViolationsToFindings(violations: Result[]): Finding[] {
       recommendation: recommendationFromContext(translatedTitle, translatedDescription),
       emagCriteria: mapToEmagCriteria(`${translatedTitle} ${translatedDescription}`),
       wcagRefs: violation.tags.filter((tag: string) => tag.startsWith("wcag")),
+      htmlElement: violation.nodes[0]?.html,
+      helpUrl: `${violation.helpUrl}&lang=pt-BR`,
       elementCount: violation.nodes.length
     };
   });
@@ -44,6 +47,7 @@ export async function runAxeAudit(url: string): Promise<AxeAuditResult> {
 
 export async function runAxeOnPage(page: Page, urlForReport: string): Promise<AxeAuditResult> {
   const axeResults = await new AxeBuilder({ page }).analyze();
+  await writeRawApiReport("axe", urlForReport, axeResults);
   const findings = mapViolationsToFindings(axeResults.violations);
 
   return {
