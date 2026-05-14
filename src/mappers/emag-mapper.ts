@@ -1,4 +1,4 @@
-import type { Finding } from "./types.js";
+import type { Finding } from "../auditors/types.js";
 
 const emagMappings: Array<{ pattern: RegExp; criteria: string[] }> = [
   { pattern: /color|contrast/i, criteria: ["3.6.1"] },

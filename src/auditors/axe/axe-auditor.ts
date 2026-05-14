@@ -2,10 +2,10 @@ import { chromium } from "playwright";
 import type { Page } from "playwright";
 import { AxeBuilder } from "@axe-core/playwright";
 import type { Result } from "axe-core";
-import { mapToEmagCriteria } from "../emag-mapper.js";
-import { normalizeSeverity, recommendationFromContext } from "../config/enrichment.js";
-import { translateToPortuguese } from "../config/translator.js";
-import { writeRawApiReport } from "../helpers/raw-report-writer.js";
+import { mapToEmagCriteria } from "../../mappers/emag-mapper.js";
+import { normalizeSeverity, recommendationFromContext } from "../../config/enrichment.js";
+import { translateToPortuguese } from "../../config/translator.js";
+import { writeRawApiReport } from "../../config/raw-report-writer.js";
 import { AxeAuditResult, Finding } from "../types.js";
 
 function mapViolationsToFindings(violations: Result[]): Finding[] {

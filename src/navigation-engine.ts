@@ -1,5 +1,5 @@
 import { readFile } from "node:fs/promises";
-import type { AuditSiteConfig, AuthenticatedFlow, PlannedAuditTarget } from "./audit-config.js";
+import type { AuditSiteConfig, AuthenticatedFlow, PlannedAuditTarget } from "./auditors/audit-config.js";
 
 export interface AuditPlan {
   publicTargets: PlannedAuditTarget[];

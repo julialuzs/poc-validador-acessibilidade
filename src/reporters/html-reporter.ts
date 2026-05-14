@@ -1,6 +1,6 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
-import { ConsolidatedReport, Finding } from "../types.js";
+import { ConsolidatedReport, Finding } from "../auditors/types.js";
 
 function escapeHtml(value: string): string {
   return value
@@ -36,8 +36,9 @@ export async function writeHtmlReport(report: ConsolidatedReport, outputPath = "
         <div>eMAG: ${escapeHtml(finding.emagCriteria.join(", "))}</div>
         ${finding.helpUrl ? `<div>Help URL: ${escapeHtml(finding.helpUrl)}</div>` : ""}
         ${finding.wcagRefs ? `<div>WCAG: ${escapeHtml(finding.wcagRefs.join(", "))}</div>` : ""} 
-        ${finding.htmlElement ? `<div>HTML Element: ${escapeHtml(finding.htmlElement)}</div>` : ""} 
-        ${finding.elementCount ? `<div>Element Count: ${escapeHtml(finding.elementCount!.toString())}</div>` : ""}
+        ${finding.cssSelector ? `<div>Seletor CSS: ${escapeHtml(finding.cssSelector)}</div>` : ""}
+        ${finding.htmlElement ? `<div>Elemento HTML: ${escapeHtml(finding.htmlElement)}</div>` : ""} 
+        ${finding.elementCount ? `<div>Quantidade de elementos: ${escapeHtml(finding.elementCount!.toString())}</div>` : ""}
       </li>`
     )
     .join("\n");

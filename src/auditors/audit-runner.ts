@@ -5,14 +5,14 @@ import { tmpdir } from "node:os";
 import { chromium } from "playwright";
 import type { Page } from "playwright";
 import type { AuditSiteConfig, PlannedAuditTarget } from "./audit-config.js";
-import type { AuditPlan } from "./navigation-engine.js";
-import { buildAuditPlan } from "./navigation-engine.js";
-import { performLogin } from "./auth-handler.js";
-import { runAxeOnPage } from "./auditors/axe-auditor.js";
-import { runLighthouseOnDebugPort } from "./auditors/lighthouse-auditor.js";
-import { runW3CAudit } from "./auditors/w3c-auditor.js";
+import type { AuditPlan } from "../navigation-engine.js";
+import { buildAuditPlan } from "../navigation-engine.js";
+import { performLogin } from "../handlers/auth-handler.js";
+import { runAxeOnPage } from "./axe/axe-auditor.js";
+import { runLighthouseOnDebugPort } from "./lighthouse/lighthouse-auditor.js";
+import { runW3CAudit } from "./w3c/w3c-auditor.js";
 import { detectAssistiveTechOnPage, mergeAssistiveTechDetections } from "./assistive-tech-detector.js";
-import { mergeEmagCodesForReport } from "./emag-mapper.js";
+import { mergeEmagCodesForReport } from "../mappers/emag-mapper.js";
 import type { AssistiveTechDetection, Finding } from "./types.js";
 
 export async function getFreeTcpPort(): Promise<number> {

@@ -4,9 +4,9 @@ import {
   ConsolidatedReport,
   Finding,
   LighthouseAuditResult,
-  Severity,
-  W3CAuditResult
-} from "./types.js";
+  Severity, 
+} from "./auditors/types.js";
+import { W3CAuditResult } from "./auditors/w3c/types.js";
 
 export function consolidateResults(params: {
   url: string;

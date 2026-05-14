@@ -1,5 +1,5 @@
 import type { Page } from "playwright";
-import type { LoginConfig } from "./audit-config.js";
+import type { LoginConfig } from "../auditors/audit-config.js";
 
 export async function performLogin(page: Page, baseUrl: string, login: LoginConfig): Promise<void> {
   const loginPath = login.route.startsWith("/") ? login.route : `/${login.route}`;

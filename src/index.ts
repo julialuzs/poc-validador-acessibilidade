@@ -1,16 +1,16 @@
-import { runAxeAudit } from "./auditors/axe-auditor.js";
-import { runLighthouseAudit } from "./auditors/lighthouse-auditor.js";
-import { runW3CAudit } from "./auditors/w3c-auditor.js";
-import { consolidateResults } from "./consolidator.js";
-import { runConfigAudit } from "./audit-runner.js";
-import { buildPipelineReport, writePipelineReport } from "./report-generator.js";
+import { runAxeAudit } from "./auditors/axe/axe-auditor.js";
+import { runLighthouseAudit } from "./auditors/lighthouse/lighthouse-auditor.js";
+import { runW3CAudit } from "./auditors/w3c/w3c-auditor.js";
+import { consolidateResults } from "./consolidator.js"; 
+import { buildPipelineReport, writePipelineReport } from "./reporters/report-generator.js";
 import { loadAuditConfig } from "./navigation-engine.js";
-import { detectAssistiveTechOnPage } from "./assistive-tech-detector.js";
+import { detectAssistiveTechOnPage } from "./auditors/assistive-tech-detector.js";
 import { chromium } from "playwright";
 import { writeHtmlReport } from "./reporters/html-reporter.js";
 import { writeJsonReport } from "./reporters/json-reporter.js";
 import { printTerminalReport } from "./reporters/terminal-reporter.js";
 import chalk from "chalk";
+import { runConfigAudit } from "./auditors/audit-runner.js";
 
 function parseArgs() {
   const args = process.argv.slice(2);

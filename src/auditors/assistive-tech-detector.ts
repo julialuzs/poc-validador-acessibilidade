@@ -1,5 +1,5 @@
 import type { Page } from "playwright";
-import type { AssistiveTechDetection } from "./types.js";
+import type { AssistiveTechDetection } from "./auditors/types.js";
 
 export async function detectAssistiveTechOnPage(page: Page): Promise<AssistiveTechDetection> {
   const detection = await page.evaluate(() => {

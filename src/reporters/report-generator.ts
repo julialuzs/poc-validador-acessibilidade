@@ -1,7 +1,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
-import { dirname } from "node:path";
-import type { RouteAuditRecord } from "./audit-runner.js";
-import type { AssistiveTechDetection, Finding } from "./types.js";
+import { dirname } from "node:path"; 
+import type { AssistiveTechDetection, Finding } from "../auditors/types.js";
+import { RouteAuditRecord } from "../auditors/audit-runner.js";
 
 export interface ConsolidatedPipelineReport {
   auditDate: string;

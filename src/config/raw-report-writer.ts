@@ -2,7 +2,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { randomBytes } from "node:crypto";
 
-export type RawReportSource = "axe" | "lighthouse" | "w3c";
+export type RawReportSource = "axe" | "lighthouse" | "w3c" | "w3c-css";
 
 function slugFromUrl(url: string): string {
   try {
