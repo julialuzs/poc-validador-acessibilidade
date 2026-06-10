@@ -11,9 +11,9 @@
     "typecheck": "tsc --noEmit"
   },
   "keywords": [],
-  "author": "",
+  "author": "Júlia Luz Maciel dos Santos",
   "license": "ISC",
-  "description": "",
+  "description": "POC do Validador de Acessibilidade baseado nas WCAG 2.2",
   "dependencies": {
     "@axe-core/playwright": "^4.11.2",
     "axe-core": "^4.11.3",
@@ -26,5 +26,13 @@
     "@types/node": "^25.6.0",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julialuzs/poc-validador-acessbilidade.git"
+  },
+  "bugs": {
+    "url": "https://github.com/julialuzs/poc-validador-acessbilidade/issues"
+  },
+  "homepage": "https://github.com/julialuzs/poc-validador-acessbilidade#readme"
 }
