@@ -1,5 +1,5 @@
 {
-  "name": "poc-validador-acessbilidade",
+  "name": "poc-validador-acessibilidade",
   "version": "1.0.0",
   "main": "dist/index.js",
   "type": "module",
@@ -29,10 +29,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/julialuzs/poc-validador-acessbilidade.git"
+    "url": "git+https://github.com/julialuzs/poc-validador-acessibilidade.git"
   },
   "bugs": {
-    "url": "https://github.com/julialuzs/poc-validador-acessbilidade/issues"
+    "url": "https://github.com/julialuzs/poc-validador-acessibilidade/issues"
   },
-  "homepage": "https://github.com/julialuzs/poc-validador-acessbilidade#readme"
+  "homepage": "https://github.com/julialuzs/poc-validador-acessibilidade#readme"
 }
