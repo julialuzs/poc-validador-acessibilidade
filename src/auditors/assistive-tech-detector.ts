@@ -1,5 +1,5 @@
 import type { Page } from "playwright";
-import type { AssistiveTechDetection } from "./auditors/types.js";
+import type { AssistiveTechDetection } from "./types.js";
 
 export async function detectAssistiveTechOnPage(page: Page): Promise<AssistiveTechDetection> {
   const detection = await page.evaluate(() => {
@@ -43,8 +43,8 @@ export function mergeAssistiveTechDetections(parts: AssistiveTechDetection[]): A
   for (const p of parts) {
     if (p.vlibras.detected) vlibras = true;
     if (p.handTalk.detected) handTalk = true;
-    p.vlibras.evidence.forEach((e) => vlibrasEvidence.add(e));
-    p.handTalk.evidence.forEach((e) => handTalkEvidence.add(e));
+    p.vlibras.evidence.forEach((e: string) => vlibrasEvidence.add(e));
+    p.handTalk.evidence.forEach((e: string) => handTalkEvidence.add(e));
   }
 
   return {
