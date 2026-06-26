@@ -1,15 +1,20 @@
+import { W3CAuditResult } from "./w3c/types.js";
+
 export type Severity = "critical" | "serious" | "moderate" | "minor" | "info";
 
 export interface Finding {
   id: string;
-  source: "lighthouse" | "axe" | "w3c";
+  source: "lighthouse" | "axe" | "w3c" | "w3c-css";
   title: string;
   description: string;
   impact?: string;
   severity: Severity;
   recommendation: string;
   emagCriteria: string[];
+  helpUrl?: string;
   wcagRefs?: string[];
+  htmlElement?: string;
+  cssSelector?: string;
   elementCount?: number;
 }
 
@@ -31,17 +36,6 @@ export interface LighthouseAuditResult {
     accessibilityScore: number | null;
     failingAudits: number;
     warningAudits: number;
-  };
-}
-
-export interface W3CAuditResult {
-  url: string;
-  checked: boolean;
-  apiAvailable: boolean;
-  findings: Finding[];
-  rawSummary: {
-    errors: number;
-    warnings: number;
   };
 }
 

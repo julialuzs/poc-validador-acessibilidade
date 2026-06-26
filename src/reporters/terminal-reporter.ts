@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { ConsolidatedReport } from "../types.js";
+import { ConsolidatedReport } from "../auditors/types.js";
 
 export function printTerminalReport(report: ConsolidatedReport): void {
   const { summary, metadata } = report;

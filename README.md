@@ -9,6 +9,7 @@ POC funcional em Node.js + TypeScript para validar viabilidade tecnica de audito
   - Lighthouse (categoria accessibility)
   - axe-core via Playwright
   - W3C Nu Validator (opcional, quando a API estiver acessivel)
+  - W3C CSS Validator (opcional, quando a API estiver acessivel)
 - Detecta tecnologias assistivas brasileiras:
   - VLibras
   - Hand Talk
@@ -35,7 +36,7 @@ npx playwright install chromium
 ## Uso
 
 ```bash
-npm run audit -- https://exemplo.com
+npm run audit -- https://www.gov.br
 ```
 
 Opcoes:
@@ -47,7 +48,7 @@ Opcoes:
 Exemplo completo:
 
 ```bash
-npm run audit -- https://www.gov.br --json ./report-gov.json --html ./report-gov.html
+npm run audit -- https://www.gov.br --json ./reports/report-gov.json --html ./reports/report-gov.html
 ```
 
 ## Estrutura
@@ -61,11 +62,14 @@ src/
   config/
     emag-mapping.ts
     enrichment.ts
-  detectors/
-    assistive-tech-detector.ts
+  handlers/
+    auth-handler.ts
+  mappers/
+    emag-mapper.ts
   reporters/
     html-reporter.ts
     json-reporter.ts
+    report-generator.ts
     terminal-reporter.ts
   consolidator.ts
   index.ts

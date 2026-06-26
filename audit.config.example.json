@@ -1,0 +1,18 @@
+{
+  "baseUrl": "http://localhost:4200",
+  "routes": ["/", "/sobre"],
+  "authenticatedFlows": [
+    {
+      "name": "dashboard-flow",
+      "login": {
+        "route": "/login",
+        "usernameSelector": "#email",
+        "passwordSelector": "#password",
+        "submitSelector": "button[type=submit]",
+        "username": "teste@email.com",
+        "password": "123456"
+      },
+      "steps": ["/dashboard", "/perfil"]
+    }
+  ]
+}

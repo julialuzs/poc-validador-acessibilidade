@@ -1,4 +1,4 @@
-import { Severity } from "../types.js";
+import { Severity } from "../auditors/types.js";
 
 export function normalizeSeverity(input?: string): Severity {
   const value = (input || "").toLowerCase();

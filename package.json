@@ -1,17 +1,24 @@
 {
-  "name": "poc-validador-acessbilidade",
-  "version": "1.0.0",
+  "name": "poc-validador-acessibilidade",
+  "version": "1.0.3",
   "main": "dist/index.js",
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "audit": "tsx src/index.ts",
+    "audit": "node dist/index.js",
+    "audit:dev": "tsx src/index.ts",
+    "audit:ci": "node dist/index.js --config audit.config.ci.json --out reports/consolidated-report.json --html reports/consolidated-report.html",
     "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build",
+    "start:fixture": "node fixtures/ci-server.mjs",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [],
-  "author": "",
+  "author": "Júlia Luz Maciel dos Santos",
   "license": "ISC",
-  "description": "",
+  "description": "POC do Validador de Acessibilidade baseado nas WCAG 2.2",
   "dependencies": {
     "@axe-core/playwright": "^4.11.2",
     "axe-core": "^4.11.3",
@@ -24,5 +31,13 @@
     "@types/node": "^25.6.0",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julialuzs/poc-validador-acessibilidade.git"
+  },
+  "bugs": {
+    "url": "https://github.com/julialuzs/poc-validador-acessibilidade/issues"
+  },
+  "homepage": "https://github.com/julialuzs/poc-validador-acessibilidade#readme"
 }

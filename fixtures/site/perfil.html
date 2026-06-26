@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Perfil</title>
+    <script src="https://plugin.handtalk.me/web/latest/handtalk.min.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <h1>Perfil</h1>
+      <p>Dados do usuario (exemplo).</p>
+    </main>
+    <script>
+      if (!document.cookie.includes("session=ok")) {
+        location.replace("/login");
+      }
+    </script>
+  </body>
+</html>
